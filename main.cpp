@@ -22,3 +22,7 @@
 namespace ancestor_tree{
 
 }
+int main(){
+    std::cout<<"hello"<<std::endl;
+    return 0;
+}
