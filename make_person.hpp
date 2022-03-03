@@ -14,7 +14,7 @@ namespace ancestor_tree{
 
     private:
         std::string<age_>;
-        std::string<test>;
+
 
     };
 }

@@ -6,7 +6,7 @@
  *
  *      1. populate skal inneholde (navn, fødselsår, alder, evt.dødsår/hvis tomt = i live, barn)
  *      2. show ancestor skal inneholde foreldrene til gitt input navn
- *      3. avstlutt programm
+ *      3. avstlutt programm. Tester tester
  *
  * 2.
  */
