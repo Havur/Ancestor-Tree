@@ -1,0 +1,8 @@
+//
+// Created by Håvard Surface on 03.03.2022.
+//
+
+#ifndef ANCESTOR_TREE_MAKE_PERSON_HPP
+#define ANCESTOR_TREE_MAKE_PERSON_HPP
+
+#endif //ANCESTOR_TREE_MAKE_PERSON_HPP
