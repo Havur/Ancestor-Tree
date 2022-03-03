@@ -13,7 +13,11 @@ namespace ancestor_tree{
 
 
     private:
-        std::string<age_>;
+        std::string name_;
+        int birthYear_;
+        int age_;
+        int deathyear_;
+        std::string parent_;
 
     };
 }

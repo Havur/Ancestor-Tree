@@ -4,7 +4,7 @@
 /*
  * 1.   1. populate ancestor chart, 2. show ancestors, 3 edit ancestor,4 exit
  *
- *      1. populate skal inneholde (navn, fødselsår, alder, evt.dødsår/hvis tomt = i live, barn)
+ *      1. populate skal inneholde (navn, fødselsår, alder, evt.dødsår/hvis tomt = i live, foreldre mor/far)
  *      2. show ancestor skal inneholde foreldrene til gitt input navn
  *      3. avstlutt programm.
  *
