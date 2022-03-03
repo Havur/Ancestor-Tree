@@ -14,8 +14,10 @@ namespace ancestor_tree{
 
     private:
         std::string<age_>;
+        std::string<test>;
 
     };
 }
 
 #endif //ANCESTOR_TREE_MAKE_PERSON_HPP
+
