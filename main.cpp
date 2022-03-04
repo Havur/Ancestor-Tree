@@ -11,7 +11,7 @@
  * 2.
  */
 
-//#include "make_person.hpp"
+#include "make_person.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -23,6 +23,10 @@ namespace ancestor_tree{
 
 }
 int main(){
-    std::cout<<"hello"<<std::endl;
+   ancestor_tree::make_person mainPerson;
+   mainPerson.insert_name();
+   mainPerson.insert_birthYear();
+   mainPerson.insert_deathYear();
+   mainPerson.insert_age();
     return 0;
 }
