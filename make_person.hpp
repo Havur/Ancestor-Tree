@@ -22,11 +22,11 @@ namespace ancestor_tree{
 
     void insert_name() {
 
-        std::cout << "Plot your name: ", std::cin >> name_, std::cout << name_ << std::endl; //Gets name from user and locates it in name_
+        std::cout << "Plot your name: ", std::cin >> name_, std::cout << "Name: " << name_ << std::endl; //Gets name from user and locates it in name_
 
     }
     void insert_birthYear() {
-        std::cout << "Plot your Year of birth: ", std::cin >> birthYear_, std::cout << birthYear_ << std::endl;
+        std::cout << "Plot your Year of birth: ", std::cin >> birthYear_, std::cout << "Birth Year: " << birthYear_ << std::endl;
     }
 
     void insert_deathYear() {
