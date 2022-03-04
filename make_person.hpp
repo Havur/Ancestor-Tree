@@ -19,6 +19,7 @@ namespace ancestor_tree{
         int deathyear_;
         std::string parent_;
 
+
     };
 }
 
