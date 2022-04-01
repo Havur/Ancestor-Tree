@@ -11,48 +11,67 @@
  * 2.
  */
 #include <iostream>
-#include <algorithm>
-#include <map>
-#include <unordered_map>
-#include <string>
-#include "make_person.hpp"
-namespace ancestor_tree{
+#include <vector>
+#include "person_builder.hpp"
+int main() {
 
-    void make_person::insert_name() {
-        std::cout << "Plot your name: ", std::cin >> name_, std::cout << "Name: " << name_ << std::endl; //Gets name from user and locates it in name_
+    std::cout << "Welcome to Person CLI"
+              << "\n\n";
 
-    }
-    void make_person::insert_birthYear() {
-        std::cout << "Plot your Year of birth: ", std::cin >> birthYear_, std::cout << "Birth Year: " << birthYear_ << std::endl; //Gets Birth year from user and locates it in birthYear
-    }
+    std::vector<Person> persons;
 
-    void make_person::insert_deathYear() {
-        std::cout << "Plot your Year of death (if still alive type -1): " , std::cin >> deathYear_;
-    }
+    bool quit = false;
+    while (!quit) {
+        std::cout << "Main menu:"
+                  << "\n";
 
+        std::cout << "1: Print persons"
+                  << "\n";
+        std::cout << "2: Print individual"
+                  << "\n";
+        std::cout << "3: Add Person"
+                  << "\n";
+        std::cout << "0: Exit"
+                  << "\n";
 
-    void make_person::insert_age() {
-        if (deathYear_ > 0) {
-            age_ = deathYear_ - birthYear_;
-            std::cout << "Age: " << age_ << std::endl;
+        int answer;
+        std::cin >> answer;// Possible issue here. What if user input is not a number?
+        //ta inn en string isteden for int og sjekk om stringen e ett tall
+        switch (answer) {
+            case 1: {
+                for (const Person &person: persons) {
+
+                    std::cout << "Name: " << person.get_name() << " Age: " << person.get_age() << std::endl;
+                }
+                break;
+            }
+            case 2:
+
+                break;
+
+            case 3: {
+                ancestor_tree::person_builder builder;
+                builder.insert_name();
+                builder.insert_birthYear();
+                builder.insert_deathYear();
+                builder.insert_age();
+                Person p = builder.create();
+                persons.push_back(p);
+                break;
+            }
+
+            case 0:
+                quit = true;
+                break;
+            default:
+                std::cout << "Unknown answer: '" << answer << "'"
+                          << "\n"
+                          << "Pleas try again.."
+                          << "\n\n";
+                break;
         }
-        else{
-            age_= currentYear_ - birthYear_;
-            std::cout<< "Age: " << age_ <<std::endl;
-        }
-
     }
 
-    make_person::make_person() {
 
-    }
-}
-
-int main(){
-   ancestor_tree::make_person mainPerson;
-   mainPerson.insert_name();
-   mainPerson.insert_birthYear();
-   mainPerson.insert_deathYear();
-   mainPerson.insert_age();
     return 0;
 }
