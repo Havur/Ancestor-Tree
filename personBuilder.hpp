@@ -51,9 +51,18 @@ namespace ancestorTree {
                 }
             }
             void insertGender() {
-                std::cout << "Plot your gender m/f: ";
+                std::cout << "Insert your gender m/f/?: ";
                 std::cin >> gender_;
+                if (gender_ == "m") {
+                    gender_ = "Male";
+                } else if (gender_ == "f") {
+                    gender_ = "Female";
+                } else {
+                    std::cout << "Insert your own gender: ";
+                    std::cin >> gender_;
+                }
             }
+
     };
 
 #endif//ANCESTOR_TREE_MAKE_PERSON_HPP
