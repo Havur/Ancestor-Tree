@@ -15,11 +15,12 @@ namespace ancestorTree {
             int age_{0};
             int deathYear_{0};
             int currentYear_{2022};
+            int id_{0};
 
         public:
             personBuilder() = default;
             person create() {
-                return {age_, name_, gender_};
+                return {id_, age_, name_, gender_};
             }
 
             void insertName() {
