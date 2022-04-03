@@ -12,13 +12,15 @@
  */
 #include <iostream>
 #include <vector>
+#include "person.hpp"
 #include "person_builder.hpp"
+
 int main() {
 
-    std::cout << "Welcome to Person CLI"
+    std::cout << "Welcome to the family tree"
               << "\n\n";
 
-    std::vector<Person> persons;
+    std::vector<person> persons;
 
     bool quit = false;
     while (!quit) {
@@ -29,7 +31,7 @@ int main() {
                   << "\n";
         std::cout << "2: Print individual"
                   << "\n";
-        std::cout << "3: Add Person"
+        std::cout << "3: Add person"
                   << "\n";
         std::cout << "0: Exit"
                   << "\n";
@@ -39,9 +41,11 @@ int main() {
         //ta inn en string isteden for int og sjekk om stringen e ett tall
         switch (answer) {
             case 1: {
-                for (const Person &person: persons) {
+                for (const person &person: persons) {
 
-                    std::cout << "Name: " << person.get_name() << " Age: " << person.get_age() << std::endl;
+                    std::cout << "Name: " << person.getName()
+                    << " Age: " << person.getAge()
+                    << " Gender: " << person.getGender() << std::endl;
                 }
                 break;
             }
@@ -50,12 +54,13 @@ int main() {
                 break;
 
             case 3: {
-                ancestor_tree::person_builder builder;
-                builder.insert_name();
-                builder.insert_birthYear();
-                builder.insert_deathYear();
-                builder.insert_age();
-                Person p = builder.create();
+                ancestorTree::personBuilder builder;
+                builder.insertName();
+                builder.insertBirthYear();
+                builder.insertDeathYear();
+                builder.insertAge();
+                builder.insertGender();
+                person p = builder.create();
                 persons.push_back(p);
                 break;
             }
