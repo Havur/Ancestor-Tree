@@ -12,6 +12,7 @@
  */
 #include <iostream>
 #include <vector>
+
 #include "person.hpp"
 #include "personBuilder.hpp"
 
@@ -43,7 +44,8 @@ int main() {
             case 1: {
                 for (const person &person: persons) {
 
-                    std::cout << "Name: " << person.getName()
+                    std::cout << "ID: " << person.getId()
+                    << " Name: " << person.getName()
                     << " Age: " << person.getAge()
                     << " Gender: " << person.getGender() << std::endl;
                 }

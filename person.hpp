@@ -15,12 +15,13 @@ class person {
         std::string gender_;
 
     public:
-        person(int id, int age, std::string name, std::string gender): id_(id), age_(age), name_(name), gender_(gender){
+        person(int id, int age, std::string name, std::string gender):
+        id_(id), age_(age), name_(name), gender_(gender){
         }
         int getAge() const{
             return age_;
         }
-        int getId() const{
+        int getId(){
             return id_;
         }
         std::string getName() const{

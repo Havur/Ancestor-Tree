@@ -1,8 +1,10 @@
 
 #include "person.hpp"
+
 #include <iostream>
 #include <map>
 #include <string>
+
 #ifndef ANCESTOR_TREE_MAKE_PERSON_HPP
 #define ANCESTOR_TREE_MAKE_PERSON_HPP
 
@@ -60,6 +62,15 @@ namespace ancestorTree {
                 } else {
                     std::cout << "Insert your own gender: ";
                     std::cin >> gender_;
+                }
+            }
+            void insertId(std::vector<person> p, int K) {
+                auto it = find(p.begin(), p.end(), K);
+
+                if (it !=  p.end()){
+                    int index = it - p.begin();
+                }else{
+                    std::cout << -1 << std::endl;
                 }
             }
 
