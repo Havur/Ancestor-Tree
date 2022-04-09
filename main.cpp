@@ -67,7 +67,6 @@ int main() {
                 persons.push_back(p);
                 break;
             }
-
             case 0:
                 quit = true;
                 break;
