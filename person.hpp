@@ -21,7 +21,7 @@ class person {
         int getAge() const{
             return age_;
         }
-        int getId(){
+        int getId(std::vector<person> person2) const{
             return id_;
         }
         std::string getName() const{

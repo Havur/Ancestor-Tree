@@ -44,7 +44,7 @@ int main() {
             case 1: {
                 for (const person &person: persons) {
 
-                    std::cout << "ID: " << person.getId()
+                    std::cout << "ID: " << person.getId(persons)
                     << " Name: " << person.getName()
                     << " Age: " << person.getAge()
                     << " Gender: " << person.getGender() << std::endl;
@@ -62,6 +62,7 @@ int main() {
                 builder.insertDeathYear();
                 builder.insertAge();
                 builder.insertGender();
+                builder.insertId(persons);
                 person p = builder.create();
                 persons.push_back(p);
                 break;

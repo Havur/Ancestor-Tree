@@ -64,14 +64,8 @@ namespace ancestorTree {
                     std::cin >> gender_;
                 }
             }
-            void insertId(std::vector<person> p, int K) {
-                auto it = find(p.begin(), p.end(), K);
-
-                if (it !=  p.end()){
-                    int index = it - p.begin();
-                }else{
-                    std::cout << -1 << std::endl;
-                }
+            void insertId(std::vector<person> person2) {
+                id_ = person2.size();
             }
 
     };
