@@ -15,6 +15,7 @@
 
 #include "person.hpp"
 #include "personBuilder.hpp"
+#include "treeBuilder.hpp"
 
 int main() {
 
