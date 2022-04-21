@@ -7,4 +7,4 @@ include_directories(.)
 
 add_executable(Ancestor_Tree
         main.cpp
-        personBuilder.hpp person.hpp)
+        Include/personBuilder.hpp Include/person.hpp)
