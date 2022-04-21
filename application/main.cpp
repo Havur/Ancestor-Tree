@@ -13,8 +13,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Include/person.hpp"
-#include "Include/personBuilder.hpp"
+#include "person.hpp"
+#include "personBuilder.hpp"
 
 int main() {
 
