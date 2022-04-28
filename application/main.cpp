@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <optional>
 
 #include "person.hpp"
 #include "personBuilder.hpp"
@@ -23,17 +24,19 @@ person createPerson(){
     std::cout << "Plot the year of birth: ";
     std::cin >> birthYear_;
 
-    int deathYear_;
+    std::optional <int> deathYear;
     std::cout << "Is person still alive? yes/no: "; //TODO NB! Needs to be rewritten.. working on it.
-    std::string isAlive;
-    std::cin >> isAlive;   //Ide! i funksjon (Is person still alive yes/no) bool, if no plot year of death.
+    std::string aliveInput;
+    std::cin >> aliveInput;   //Ide! i funksjon (Is person still alive yes/no) bool, if no plot year of death.
 
-    if (isAlive == "yes" || "y"){
+    if (aliveInput == "yes" || aliveInput == "y"){
         bool alive = true;
     }
-    else if (isAlive == "no" || "n") {
+    else if (aliveInput == "no" || aliveInput == "n") {
         std::cout << "Plot the year of death: ";
-        std::cin >> deathYear_;
+        int deathYearTemp;
+        std::cin >> deathYearTemp;
+        deathYear = deathYearTemp;
     }
     else {
         std::cout<<"Wrong input"<<std::endl;
@@ -51,7 +54,7 @@ person createPerson(){
         std::cout << "Insert own gender: ";
         std::cin >> gender_;
     }
-    return person(name_,gender_,birthYear_,deathYear_);
+    return person(name_,gender_,birthYear_,deathYear);
 }
 int main() {
 
