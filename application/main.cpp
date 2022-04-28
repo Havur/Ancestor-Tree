@@ -1,28 +1,49 @@
-//
-// Created by Håvard Surface on 03.03.2022.
-//
-/*
- * 1.   1. populate ancestor chart, 2. show ancestors, 3 edit ancestor,4 exit
- *
- *      1. populate skal inneholde (navn, fødselsår, alder, evt.dødsår/hvis tomt = i live, foreldre mor/far)
- *      2. show ancestor skal inneholde foreldrene til gitt input navn
- *      3. avstlutt programm.!
- *
- * 2.
- */
 #include <iostream>
 #include <vector>
 
 #include "person.hpp"
 #include "personBuilder.hpp"
-#include "treeBuilder.hpp"
+#include "tree.hpp"
 
+person createPerson(){
+    std::string name_;
+    std::cout << "Plot your name: ";
+    std::cin.ignore();
+    std::getline(std::cin, name_);
+    std::cout << "Name: " << name_ << std::endl;
+
+    int birthYear_;
+    std::cout << "Plot your Year of birth: ";
+    std::cin >> birthYear_;
+
+    int deathYear_;
+    std::cout << "Plot your Year of death (if still alive type -1): ";
+    std::cin >> deathYear_;//NB! Needs to be rebuilt
+
+    std::string gender_;
+    std::cout << "Insert your gender m/f/?: ";
+    std::cin >> gender_;
+    if (gender_ == "m") {
+        gender_ = "Male";
+    } else if (gender_ == "f") {
+        gender_ = "Female";
+    } else {
+        std::cout << "Insert your own gender: ";
+        std::cin >> gender_;
+    }
+    return person(name_,gender_,birthYear_,deathYear_);
+}
 int main() {
 
     std::cout << "Welcome to the family tree"
               << "\n\n";
 
-    std::vector<person> persons;
+
+   auto root = std::make_shared<Node>(createPerson());
+  // auto mother = std::make_shared<Node>();
+  // auto father = std::make_shared<Node>();
+  // root->addFather(father);
+  // root->addMother(mother);
 
     bool quit = false;
     while (!quit) {
@@ -42,30 +63,28 @@ int main() {
         std::cin >> answer;// Possible issue here. What if user input is not a number?
         //ta inn en string isteden for int og sjekk om stringen e ett tall
         switch (answer) {
-            case 1: {
-                for (const person &person: persons) {
+            case 1:
+          // for (const person &person: ) {
 
-                    std::cout << "ID: " << person.getId(persons)
-                    << " Name: " << person.getName()
-                    << " Age: " << person.getAge()
-                    << " Gender: " << person.getGender() << std::endl;
-                }
+          //     << " Name: " << person.getName()
+          //     << " Age: " << person.getAge()
+          //     << " Gender: " << person.getGender() << std::endl;
+
                 break;
-            }
+
             case 2:
 
                 break;
 
             case 3: {
-                ancestorTree::personBuilder builder;
-                builder.insertName();
-                builder.insertBirthYear();
-                builder.insertDeathYear();
-                builder.insertAge();
-                builder.insertGender();
-                builder.insertId(persons);
-                person p = builder.create();
-                persons.push_back(p);
+                //lag en person
+                auto person = createPerson();
+                std::cout << "Name of closest relative" << std::endl;
+                std::string relative;
+                std::cin.ignore();
+                std::getline(std::cin, relative);
+                std::cout << "Name: " << relative << std::endl;
+
                 break;
             }
             case 0:
