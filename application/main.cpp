@@ -7,36 +7,48 @@
 
 person createPerson(){
     std::string name_;
-    std::cout << "Plot your name: ";
+    std::cout << "Type name: " ;
     std::cin.ignore();
     std::getline(std::cin, name_);
-    std::cout << "Name: " << name_ << std::endl;
+    std::cout << "Name: " <<  name_ << std::endl;
 
     int birthYear_;
-    std::cout << "Plot your Year of birth: ";
+    std::cout << "Plot the Year of birth: ";
     std::cin >> birthYear_;
 
     int deathYear_;
-    std::cout << "Plot your Year of death (if still alive type -1): ";
-    std::cin >> deathYear_;//NB! Needs to be rebuilt
+    std::cout << "Is person still alive? yes/no "; //TODO NB! Needs to be rewritten.. working on it.
+    bool alive;
+    if (alive == "yes" || "y"){
+         alive = true;
+    }
+    else if (alive == "no" || "n") {
+        alive = false;
+    }
+    else {
+        std::cout<<"Wrong input"
+    }
+
+
+    std::cin >> deathYear_;   //Ide! i funksjon (Is person still alive yes/no) bool, if yes plot year of death.
 
     std::string gender_;
-    std::cout << "Insert your gender m/f/?: ";
+    std::cout << "Insert gender m/f/?: ";
     std::cin >> gender_;
     if (gender_ == "m") {
         gender_ = "Male";
     } else if (gender_ == "f") {
         gender_ = "Female";
     } else {
-        std::cout << "Insert your own gender: ";
+        std::cout << "Insert own gender: ";
         std::cin >> gender_;
     }
     return person(name_,gender_,birthYear_,deathYear_);
 }
 int main() {
 
-    std::cout << "Welcome to the family tree"
-              << "\n\n";
+    std::cout << "Welcome to the family tree. \n\n"
+                 "Lets start off by creating yourself in the tree >:D \n";
 
 
    auto root = std::make_shared<Node>(createPerson());
@@ -50,11 +62,11 @@ int main() {
         std::cout << "Main menu:"
                   << "\n";
 
-        std::cout << "1: Print persons"
+        std::cout << "1: Print tree"
                   << "\n";
         std::cout << "2: Print individual"
                   << "\n";
-        std::cout << "3: Add person"
+        std::cout << "3: Add ancestor"
                   << "\n";
         std::cout << "0: Exit"
                   << "\n";
