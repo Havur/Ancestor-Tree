@@ -5,32 +5,40 @@
 #include "personBuilder.hpp"
 #include "tree.hpp"
 
+bool hasRootNode = false;
+
 person createPerson(){
     std::string name_;
     std::cout << "Type name: " ;
-    std::cin.ignore();
+    if(hasRootNode) {
+        std::cin.ignore();
+    } else {
+        hasRootNode = true;
+    }//stupid fix, this fixes so the the first character in root person name is not skipped...
+
     std::getline(std::cin, name_);
     std::cout << "Name: " <<  name_ << std::endl;
 
     int birthYear_;
-    std::cout << "Plot the Year of birth: ";
+    std::cout << "Plot the year of birth: ";
     std::cin >> birthYear_;
 
     int deathYear_;
-    std::cout << "Is person still alive? yes/no "; //TODO NB! Needs to be rewritten.. working on it.
-    bool alive;
-    if (alive == "yes" || "y"){
-         alive = true;
+    std::cout << "Is person still alive? yes/no: "; //TODO NB! Needs to be rewritten.. working on it.
+    std::string isAlive;
+    std::cin >> isAlive;   //Ide! i funksjon (Is person still alive yes/no) bool, if no plot year of death.
+
+    if (isAlive == "yes" || "y"){
+        bool alive = true;
     }
-    else if (alive == "no" || "n") {
-        alive = false;
+    else if (isAlive == "no" || "n") {
+        std::cout << "Plot the year of death: ";
+        std::cin >> deathYear_;
     }
     else {
-        std::cout<<"Wrong input"
+        std::cout<<"Wrong input"<<std::endl;
     }
 
-
-    std::cin >> deathYear_;   //Ide! i funksjon (Is person still alive yes/no) bool, if yes plot year of death.
 
     std::string gender_;
     std::cout << "Insert gender m/f/?: ";

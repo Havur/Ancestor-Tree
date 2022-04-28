@@ -1,6 +1,3 @@
-//
-// Created by Robert Alan Moltu on 21/04/2022.
-//
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 

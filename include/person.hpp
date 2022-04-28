@@ -1,6 +1,3 @@
-//
-// Created by Robert Alan Moltu on 01/04/2022.
-//
 #include <string>
 #include <vector>
 #include <chrono>
