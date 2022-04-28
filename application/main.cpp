@@ -66,7 +66,7 @@ int main() {
             case 1:
           // for (const person &person: ) {
 
-          //     << " Name: " << person.getName()
+          //     << " Name: " << person.getName() test
           //     << " Age: " << person.getAge()
           //     << " Gender: " << person.getGender() << std::endl;
 
