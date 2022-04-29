@@ -12,27 +12,40 @@
 #include "personBuilder.hpp"
 #include "person.hpp"
 
-class Node{
+class nodeTree{
 
 private:
+    struct Node{
+        person person_;
+        int number;
+    };
     person data;
-    //std::vector<Node*> children;
-    std::shared_ptr<Node> left, right;
+    //std::vector<nodeTree*> children;
+    std::shared_ptr<nodeTree> left, right;
 
 public:
-    void addMother(std::shared_ptr<Node> mother){
+    void addMother(std::shared_ptr<nodeTree> mother){
         left = std::move(mother);
     }
 
-    void addFather(std::shared_ptr<Node> father){
+    void addFather(std::shared_ptr<nodeTree> father){
         right = std::move(father);
     }
-    explicit Node(person data);
+    explicit nodeTree(person data);
+
+    void setRoot(person data){
+    }
+
 };
 
-Node::Node(person p): data(p) {
+void printTree(){
 
 }
+
+nodeTree::nodeTree(person p): data(p) {
+
+}
+
 
 
 #endif //ANCESTOR_TREE_TREE_HPP

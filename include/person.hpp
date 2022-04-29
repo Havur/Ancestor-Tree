@@ -15,14 +15,16 @@ private:
     std::optional<int> deathYear_;
 
 public:
-    person(std::string name, std::string gender, int birthYear, int deathYear) : name_(name), gender_(gender),
-                                                                                 birthYear_(birthYear),
-                                                                                 deathYear_(deathYear) {
+    person(std::string name, std::string gender, int birthYear, std::optional<int> deathYear) : name_(name),
+                                                                                                gender_(gender),
+                                                                                                birthYear_(birthYear),
+                                                                                                deathYear_(deathYear) {
     }
 
     [[nodiscard]] int getAge() const {
         int age;
-        double now = floor(static_cast<double>(std::chrono::system_clock::now().time_since_epoch().count() / 31536000000.0));
+        double now = floor(
+                static_cast<double>(std::chrono::system_clock::now().time_since_epoch().count() / 31536000000.0));
         if (deathYear_) {
             age = *deathYear_ - birthYear_;
         } else {

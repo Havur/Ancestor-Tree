@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <optional>
 
 #include "person.hpp"
@@ -25,12 +24,12 @@ person createPerson(){
     std::cin >> birthYear_;
 
     std::optional <int> deathYear;
-    std::cout << "Is person still alive? yes/no: "; //TODO NB! Needs to be rewritten.. working on it.
+    std::cout << "Is person still alive? yes/no: ";
     std::string aliveInput;
-    std::cin >> aliveInput;   //Ide! i funksjon (Is person still alive yes/no) bool, if no plot year of death.
+    std::cin >> aliveInput;
 
     if (aliveInput == "yes" || aliveInput == "y"){
-        bool alive = true;
+        //bool alive = true;
     }
     else if (aliveInput == "no" || aliveInput == "n") {
         std::cout << "Plot the year of death: ";
@@ -54,19 +53,19 @@ person createPerson(){
         std::cout << "Insert own gender: ";
         std::cin >> gender_;
     }
-    return person(name_,gender_,birthYear_,deathYear);
+    return person{name_,gender_,birthYear_,deathYear};
 }
 int main() {
 
     std::cout << "Welcome to the family tree. \n\n"
-                 "Lets start off by creating yourself in the tree >:D \n";
+                 "Lets start off by creating the main person in the tree >:D \n";
 
 
-   auto root = std::make_shared<Node>(createPerson());
-  // auto mother = std::make_shared<Node>();
-  // auto father = std::make_shared<Node>();
-  // root->addFather(father);
-  // root->addMother(mother);
+   auto root = std::make_shared<nodeTree>(createPerson());
+   //auto mother = std::make_shared<nodeTree>();
+   //auto father = std::make_shared<nodeTree>();
+   //root->addFather(father);
+  //root->addMother(mother);
 
     bool quit = false;
     while (!quit) {
@@ -87,11 +86,6 @@ int main() {
         //ta inn en string isteden for int og sjekk om stringen e ett tall
         switch (answer) {
             case 1:
-          // for (const person &person: ) {
-
-          //     << " Name: " << person.getName() test
-          //     << " Age: " << person.getAge()
-          //     << " Gender: " << person.getGender() << std::endl;
 
                 break;
 
@@ -100,13 +94,18 @@ int main() {
                 break;
 
             case 3: {
-                //lag en person
+
                 auto person = createPerson();
+                if (person.getGender() == "m"){
+                   root->addFather(std::make_shared<nodeTree>(person));}
+                else if (person.getGender() == "f"){
+                    root->addMother(std::make_shared<nodeTree>(person));}
                 std::cout << "Name of closest relative" << std::endl;
                 std::string relative;
                 std::cin.ignore();
                 std::getline(std::cin, relative);
                 std::cout << "Name: " << relative << std::endl;
+
 
                 break;
             }
