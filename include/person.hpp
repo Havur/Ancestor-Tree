@@ -1,4 +1,5 @@
 #include <string>
+#include <utility>
 #include <vector>
 #include <chrono>
 #include <cmath>
@@ -15,8 +16,9 @@ private:
     std::optional<int> deathYear_;
 
 public:
-    person(std::string name, std::string gender, int birthYear, std::optional<int> deathYear) : name_(name),
-                                                                                                gender_(gender),
+    person(std::string name, std::string gender, int birthYear, std::optional<int> deathYear) : name_(std::move(name)),
+                                                                                                gender_(std::move(
+                                                                                                        gender)),
                                                                                                 birthYear_(birthYear),
                                                                                                 deathYear_(deathYear) {
     }
@@ -35,11 +37,11 @@ public:
     }
 
 
-    std::string getName() const {
+    [[nodiscard]] std::string getName() const {
         return name_;
     }
 
-    std::string getGender() const {
+    [[nodiscard]] std::string getGender() const {
         return gender_;
     }
 
