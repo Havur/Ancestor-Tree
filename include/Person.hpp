@@ -7,20 +7,24 @@
 
 #ifndef ANCESTOR_TREE_PERSON_HPP
 #define ANCESTOR_TREE_PERSON_HPP
+enum class Gender {
+    female, male, other
+};
 
-class person {
+
+class Person {
 private:
     std::string name_;
-    std::string gender_;
+    Gender gender_;
     int birthYear_;
     std::optional<int> deathYear_;
 
 public:
-    person(std::string name, std::string gender, int birthYear, std::optional<int> deathYear) : name_(std::move(name)),
-                                                                                                gender_(std::move(
-                                                                                                        gender)),
-                                                                                                birthYear_(birthYear),
-                                                                                                deathYear_(deathYear) {
+    Person(std::string name, Gender gender, int birthYear, std::optional<int> deathYear) : name_(std::move(name)),
+                                                                                           gender_(std::move(
+                                                                                                   gender)),
+                                                                                           birthYear_(birthYear),
+                                                                                           deathYear_(deathYear) {
     }
 
     [[nodiscard]] int getAge() const {
@@ -41,7 +45,7 @@ public:
         return name_;
     }
 
-    [[nodiscard]] std::string getGender() const {
+    [[nodiscard]] Gender getGender() const {
         return gender_;
     }
 

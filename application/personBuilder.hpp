@@ -1,4 +1,4 @@
-#include "person.hpp"
+#include "Person.hpp"
 #include <iostream>
 #include <map>
 #include <string>
@@ -7,12 +7,12 @@
 #define ANCESTOR_TREE_MAKE_PERSON_HPP
 
 namespace ancestorTree {
-    static person createPerson(bool hasRootNode) {
+    static Person createPerson(bool hasRootNode) {
         std::string name_;
         std::cout << "Type name: ";
         if (hasRootNode) {
             std::cin.ignore();
-        }                       //this fixes so the the first character in root person name is not skipped...
+        }                       //this fixes so the the first character in root Person name is not skipped...
         std::getline(std::cin, name_);
         std::cout << "Name: " << name_ << std::endl;
 
@@ -24,12 +24,12 @@ namespace ancestorTree {
             try {
                 birthYear_ = std::stoi(input);
             } catch (std::exception &ex) {
-                std::cout<< "Unknown input, add a valid birthyear." << std::endl;
+                std::cout << "Unknown input, add a valid birthyear." << std::endl;
             }
         }
 
         std::optional<int> deathYear;
-        std::cout << "Is person still alive? yes/no: ";
+        std::cout << "Is Person still alive? yes/no: ";
         std::string aliveInput;
         std::cin >> aliveInput;
 
@@ -37,32 +37,32 @@ namespace ancestorTree {
 
         } else if (aliveInput == "no" || aliveInput == "n") {
             int deathYearTemp = -1;
-            while (deathYearTemp == -1){
+            while (deathYearTemp == -1) {
                 std::string input;
                 std::cout << "Plot the year of death: ";
                 std::cin >> input;
                 try {
                     deathYearTemp = std::stoi(input);
                 } catch (std::exception &ex) {
-                    std::cout<< "Unknown input, add a valid birthyear." << std::endl;
+                    std::cout << "Unknown input, add a valid birthyear." << std::endl;
                 }
             }
         } else {
         }
 
+        Gender gender_;
+        std::string genderString;
+        std::cout << "Insert gender Male/Female/Other: ";
+        std::cin >> genderString;
+        if (genderString == "Male") {
+            gender_ = Gender::male;
+        } else if (genderString == "Female") {
+            gender_ = Gender::female;
+        } else if (genderString == "Other") {
+            gender_ = Gender::other;
 
-        std::string gender_;
-        std::cout << "Insert gender m/f/?: ";
-        std::cin >> gender_;
-        if (gender_ == "m") {
-            gender_ = "Male";
-        } else if (gender_ == "f") {
-            gender_ = "Female";
-        } else {
-            std::cout << "Insert own gender: ";
-            std::cin >> gender_;
         }
-        return person{name_, gender_, birthYear_, deathYear};
+        return Person{name_, gender_, birthYear_, deathYear};
     }
 
 }

@@ -12,5 +12,5 @@ Robert og Håvard koser seg med koding :)
 * 2.
 */
 
-istedenfor å bruke father og mother kan man bruke parent 1 og parent 2 slik at visst der er en person med to mødre eller
+istedenfor å bruke father og mother kan man bruke parent 1 og parent 2 slik at visst der er en Person med to mødre eller
 to fedre funker programmet
