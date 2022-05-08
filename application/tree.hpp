@@ -22,7 +22,7 @@ private:
 public:
     //explicit nodeTree(nodeTree *p);
 
-    void addParent(Person parent) {
+    void addParent(const Person& parent) {
         auto sharedParent = std::make_shared<nodeTree>(parent);
 
         if (left_ == nullptr) {
@@ -32,13 +32,13 @@ public:
         }
     }
 
-    void addLeft(std::shared_ptr<nodeTree> parent1) {
-        left_ = parent1;
+   void addLeft(std::shared_ptr<nodeTree> parent1) {
+        left_ = std::move(parent1);
         left_->parent_ = this;
     }
 
     void addRight(std::shared_ptr<nodeTree> parent2) {
-        right_ = parent2;
+        right_ = std::move(parent2);
         right_->parent_ = this;
     }
 
@@ -60,17 +60,17 @@ public:
         return nullptr;
     }
 
-    void addParentFunc(std::string childName, const Person &ancestor) {
+    void addParentFunc(const std::string& childName, const Person &ancestor) {
         auto child = traverseDepthFirst([childName](nodeTree *node) {
             return childName == node->data_.getName();
         });
 
         if (child != nullptr) {
-            this->addParent(ancestor);
+            child->addParent(ancestor);
         }
     }
 
-    nodeTree(Person p) : data_(p) {}
+    explicit nodeTree(Person p) : data_(std::move(p)) {}
 };
 
 

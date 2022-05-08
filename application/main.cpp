@@ -50,7 +50,7 @@ int main() {
                 // Step 1: Create a new person
                 auto person = ancestorTree::createPerson(true);
 
-                // Step 2: Prompt the user which person this person should be parent of
+                // Step 2: Prompt the user which person this person should be the parent of
                 std::cout << "Who is the child? (Enter name)" << std::endl;
                 std::string childName;
                 std::cin.ignore();
@@ -62,7 +62,6 @@ int main() {
                 root.addParentFunc(childName, person);
 
                 // Step 4: When child is found, child.addParent(person)
-
                 // Step 4b: If child is not found, say child not found and don't add person to
                 // tree
 
