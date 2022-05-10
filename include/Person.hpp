@@ -46,7 +46,18 @@ public:
     [[nodiscard]] Gender getGender() const {
         return gender_;
     }
-
+    friend std::ostream& operator<<(std::ostream& os, const Person& person)
+    {
+        os << "Name: " << person.getName() << "\n";
+        os << "Age: " << person.getAge() << "\n";
+        bool isMale = person.getGender() == Gender::male;
+        if (isMale) {
+            os << "Gender: Male\n";
+        } else {
+            os << "Gender: Female\n";
+        }
+        return os;
+    }
 };
 
 #endif //ANCESTOR_TREE_PERSON_HPP

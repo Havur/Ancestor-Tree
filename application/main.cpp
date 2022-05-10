@@ -46,11 +46,8 @@ int main() {
                 std::cin.ignore();
                 std::string name;
                 std::getline(std::cin, name);
-                findByName(&name);
-                std::cout << data_.getName();
-                std::cout << person->data_.getBirthYear();
-                std::cout << person->data_.getGender();
-                std::cout << person->data_.getAge();
+                root.findByName(name);
+
                 break;
             }
             case 3: {
