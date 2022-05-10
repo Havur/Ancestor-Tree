@@ -46,9 +46,11 @@ int main() {
                 std::cin.ignore();
                 std::string name;
                 std::getline(std::cin, name);
-                nodeTree* findByName(std::string &name);
-
-
+                findByName(&name);
+                std::cout << data_.getName();
+                std::cout << person->data_.getBirthYear();
+                std::cout << person->data_.getGender();
+                std::cout << person->data_.getAge();
                 break;
             }
             case 3: {
