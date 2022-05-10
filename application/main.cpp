@@ -38,7 +38,7 @@ int main() {
 
         switch (input) {
             case 1:
-
+                //TODO, print all members in family tree.
                 break;
 
             case 2: {
@@ -46,8 +46,10 @@ int main() {
                 std::cin.ignore();
                 std::string name;
                 std::getline(std::cin, name);
-                root.findByName(name);
-
+                auto person = root.findByName(name);
+                std::cout << person->data_;
+                //TODO, make an edit option so that user can edit the person searched for.
+                //TODO, if person does not exist in tree return "wrong" and loop again (failsafe)
                 break;
             }
             case 3: {

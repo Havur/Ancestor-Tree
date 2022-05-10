@@ -28,7 +28,8 @@ public:
 
     [[nodiscard]] int getAge() const {
         int age;
-        int now = floor(static_cast<double>(std::chrono::system_clock::now().time_since_epoch().count() / 31557600000));
+        int now = floor(static_cast<double>(std::chrono::system_clock::now().time_since_epoch().count())/31556952000000 + 1970);
+        //using chrono and dividing with a year in microseconds and adding 1970
         if (deathYear_) {
             age = *deathYear_ - birthYear_;
         } else {
@@ -50,6 +51,9 @@ public:
     {
         os << "Name: " << person.getName() << "\n";
         os << "Age: " << person.getAge() << "\n";
+        os << "Year of birth: " << person.birthYear_ << "\n";
+        //os << "Year of death: " << person.deathYear_ << "\n";
+        // if not dead return "none" TODO, find a solution of how to add deathyear, since int is optional
         bool isMale = person.getGender() == Gender::male;
         if (isMale) {
             os << "Gender: Male\n";

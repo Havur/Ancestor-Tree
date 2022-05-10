@@ -78,7 +78,6 @@ public:
         }, [](nodeTree *) {});}
 
 
-
     explicit nodeTree(Person p) : data_(std::move(p)) {}
 
     Person data_;
