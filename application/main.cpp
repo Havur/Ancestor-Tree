@@ -42,7 +42,12 @@ int main() {
                 break;
 
             case 2: {
-                //nodeTree::traverseDepthFirst([](nodeTree* n){});
+                std::cout<< "Enter the name of whom you wish to search for" << std::endl;
+                std::cin.ignore();
+                std::string name;
+                std::getline(std::cin, name);
+                nodeTree* findByName(std::string &name);
+
 
                 break;
             }

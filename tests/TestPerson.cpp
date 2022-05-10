@@ -3,13 +3,14 @@
 
 #include "Person.hpp"
 
+
 #include <sstream>
 
 TEST_CASE("Print name") {
 //    std::string  name= "Ola Conny";
-//     Person p{0, 45, name, "Male"};
+//     Person root{45, name, Gender::male};
 //
-//    REQUIRE(p.getName() == name);
+//    REQUIRE(root.getName() == name);
 //
 }
 TEST_CASE("Print age") {
