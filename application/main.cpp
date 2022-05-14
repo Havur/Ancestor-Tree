@@ -38,7 +38,7 @@ int main() {
 
         switch (input) {
             case 1:
-                //TODO, print all members in family tree.
+                root.printTree();
                 break;
 
             case 2: {
