@@ -47,9 +47,13 @@ int main() {
                 std::string name;
                 std::getline(std::cin, name);
                 auto person = root.findByName(name);
-                std::cout << person->data_;
+                if (person != nullptr) {
+                    std::cout << person->data_ << "\n";
+                } else {
+                    std::cout << "Couldn't find person " << name << "\n";
+                }
                 //TODO, make an edit option so that user can edit the person searched for.
-                //TODO, if person does not exist in tree return "wrong" and loop again (failsafe)
+                //TODO, Add relative level "Grandfather,mother,grandmother" etc.
                 break;
             }
             case 3: {

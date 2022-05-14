@@ -45,15 +45,21 @@ public:
         return parent_ != nullptr;
     }
 
-    nodeTree *
-    traverseDepthFirst(const std::function<bool(nodeTree *)> &predicate, const std::function<void(nodeTree *)> &f) {
-        f(this);
+    nodeTree *traverseDepthFirst(const std::function<bool(nodeTree *)> &predicate, const std::function<void(nodeTree *, int)> &f, int currDepth=0) {
+        f(this, currDepth);
 
         if (left_ != nullptr) {
-            left_->traverseDepthFirst(predicate, f);
+
+            auto person = left_->traverseDepthFirst(predicate, f, currDepth + 1);
+            if(person != nullptr)
+                return person;
         }
+
         if (right_ != nullptr) {
-            right_->traverseDepthFirst(predicate, f);
+
+            auto person = right_->traverseDepthFirst(predicate, f, currDepth + 1);
+            if(person != nullptr)
+                return person;
         }
         if (predicate(this)) {
             return this;
@@ -64,7 +70,7 @@ public:
     void addParentFunc(const std::string &childName, const Person &ancestor) {
         auto child = traverseDepthFirst([childName](nodeTree *node) {
             return childName == node->data_.getName();
-        }, [](nodeTree *) {});
+        }, [](nodeTree *, int) {});
 
         if (child != nullptr) {
             child->addParent(ancestor);
@@ -75,11 +81,12 @@ public:
         // returner personen du får fra traverseDepthFirst direkte
         return traverseDepthFirst([name](nodeTree *node) {
             return name == node->data_.getName();
-        }, [](nodeTree *) {});}
+        }, [](nodeTree *, int) {});}
 
-
+       void printTree(){
+           traverseDepthFirst([]{})
+    }
     explicit nodeTree(Person p) : data_(std::move(p)) {}
-
     Person data_;
 };
 
