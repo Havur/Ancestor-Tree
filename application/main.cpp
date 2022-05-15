@@ -7,8 +7,11 @@
 
 int main() {
 
-    std::cout << "Welcome to the family tree. \n\n"
-                 "Lets start off by creating the main Person in the tree >:D \n";
+    std::cout << "╦ ╦┌─┐┬  ┌─┐┌─┐┌┬┐┌─┐  ┌┬┐┌─┐  ┌┬┐┬ ┬┌─┐  ┌─┐┌─┐┌┬┐┬┬ ┬ ┬  ┌┬┐┬─┐┌─┐┌─┐  ┌┬┐┌─┐┬┌─┌─┐┬─┐\n"
+                 "║║║├┤ │  │  │ ││││├┤    │ │ │   │ ├─┤├┤   ├┤ ├─┤│││││ └┬┘   │ ├┬┘├┤ ├┤   │││├─┤├┴┐├┤ ├┬┘\n"
+                 "╚╩╝└─┘┴─┘└─┘└─┘┴ ┴└─┘   ┴ └─┘   ┴ ┴ ┴└─┘  └  ┴ ┴┴ ┴┴┴─┘┴    ┴ ┴└─└─┘└─┘  ┴ ┴┴ ┴┴ ┴└─┘┴└─ \n\n"
+                 "\n"
+                 "Lets start off by creating the main person in the tree.\n";
 
 
     auto root = nodeTree(ancestorTree::createPerson(false));
@@ -61,22 +64,27 @@ int main() {
                 auto person = ancestorTree::createPerson(true);
 
                 // Step 2: Prompt the user which person this person should be the parent of
-                std::cout << "Who is the child? (Enter name)" << std::endl;
-                std::string childName;
-                std::cin.ignore();
-                std::getline(std::cin, childName);
-                std::cout << "Name: " << childName << std::endl;
+                while (true) {
+                    std::cout << "Who is the child? (Enter name)" << std::endl;
+                    std::string childName;
+                    std::cin.ignore();
+                    std::getline(std::cin, childName);
+                    std::cout << "Name: " << childName << std::endl;
 
-                // Step 3: Search the tree for this person to add a parent to
-                //root.addParent(std::make_shared<nodeTree>(person));
-                root.addParentFunc(childName, person);
-
-                // Step 4: When child is found, child.addParent(person)
-                // Step 4b: If child is not found, say child not found and don't add person to
-                // tree
+                    // Step 3: Search the tree for this person to add a parent to
+                    //root.addParent(std::make_shared<nodeTree>(person));
+                    if (root.addParentFunc(childName, person)) break;
+                    std::cout << "Couldn't find person, try again ";
+                }
 
 
-                break;
+                    // Step 4: When child is found, child.addParent(person)
+                    // Step 4b: If child is not found, say child not found and don't add person to
+                    // tree
+
+
+                    break;
+
             }
             case 0:
                 quit = true;

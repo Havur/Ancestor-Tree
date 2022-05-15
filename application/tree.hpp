@@ -78,7 +78,7 @@ public:
         return nullptr;
     }
 
-    void addParentFunc(const std::string &childName, const Person &ancestor)
+    bool addParentFunc(const std::string &childName, const Person &ancestor)
     {
         auto child = traverseDepthFirst([childName](nodeTree *node)
                                         { return childName == node->data_.getName(); },
@@ -88,6 +88,7 @@ public:
         {
             child->addParent(ancestor);
         }
+        return true;
     }
     // returner en person (nodeTree*), gitt et navn (std::string)
     nodeTree *findByName(std::string &name)
