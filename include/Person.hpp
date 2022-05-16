@@ -55,10 +55,14 @@ public:
         //os << "Year of death: " << person.deathYear_ << "\n";
         // if not dead return "none" TODO, find a solution of how to add deathyear, since int is optional
         bool isMale = person.getGender() == Gender::male;
+        bool isFemale = person.getGender() == Gender::female;
         if (isMale) {
             os << "Gender: Male\n";
-        } else {
+        } else if(isFemale) {
             os << "Gender: Female\n";
+        }
+        else {
+            os << "Gender: Other\n";
         }
         return os;
     }

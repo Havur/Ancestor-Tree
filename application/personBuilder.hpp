@@ -58,10 +58,10 @@ namespace ancestorTree {
             gender_ = Gender::male;
         } else if (genderString == "Female") {
             gender_ = Gender::female;
-        } else if (genderString == "Other") {
+        } else if(genderString == "Other") {
             gender_ = Gender::other;
-
         }
+
         return Person{name_, gender_, birthYear_, deathYear};
     }
 

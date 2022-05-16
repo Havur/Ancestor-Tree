@@ -87,8 +87,9 @@ public:
         if (child != nullptr)
         {
             child->addParent(ancestor);
+            return true;
         }
-        return true;
+        else;
     }
     // returner en person (nodeTree*), gitt et navn (std::string)
     nodeTree *findByName(std::string &name)

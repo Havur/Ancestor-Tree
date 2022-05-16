@@ -45,7 +45,7 @@ int main() {
                 break;
 
             case 2: {
-                std::cout<< "Enter the name of whom you wish to search for" << std::endl;
+                std::cout << "Enter the name of whom you wish to search for" << std::endl;
                 std::cin.ignore();
                 std::string name;
                 std::getline(std::cin, name);
@@ -62,29 +62,30 @@ int main() {
             case 3: {
                 // Step 1: Create a new person
                 auto person = ancestorTree::createPerson(true);
+                addPersonToTree(){
 
+                }
                 // Step 2: Prompt the user which person this person should be the parent of
                 while (true) {
+                    bool hasChildName =  ;
+                    if (hasChildName) {
+                        std::cin.ignore();
+                    }
                     std::cout << "Who is the child? (Enter name)" << std::endl;
                     std::string childName;
-                    std::cin.ignore();
                     std::getline(std::cin, childName);
-                    std::cout << "Name: " << childName << std::endl;
 
-                    // Step 3: Search the tree for this person to add a parent to
-                    //root.addParent(std::make_shared<nodeTree>(person));
-                    if (root.addParentFunc(childName, person)) break;
-                    std::cout << "Couldn't find person, try again ";
+                    if (root.addParentFunc(childName, person))break;
+                    std::cout << "Couldn't find name, please try again" << std::endl;
+
+                        //std::cout << "Name: " << childName << std::endl;
+
                 }
+                // Step 4: When child is found, child.addParent(person)
+                // Step 4b: If child is not found, say child not found and don't add person to
+                // tree
 
-
-                    // Step 4: When child is found, child.addParent(person)
-                    // Step 4b: If child is not found, say child not found and don't add person to
-                    // tree
-
-
-                    break;
-
+                break;
             }
             case 0:
                 quit = true;

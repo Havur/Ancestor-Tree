@@ -47,7 +47,13 @@ TEST_CASE("Print tree") {
     auto kirsti = std::make_shared<nodeTree>(Person{"Kirsti", Gender::female, 2000, 0});
     auto arnold = std::make_shared<nodeTree>(Person{"Arnold", Gender::male, 2000, 0});
     synne->addRight(kirsti);
-    synne->addLeft(per);
+    synne->addLeft(arnold);
+
+    auto sander = std::make_shared<nodeTree>(Person{"Sander", Gender::male, 2000, 0});
+    auto camilla = std::make_shared<nodeTree>(Person{"Camilla", Gender::female, 2000, 0});
+    per->addLeft(sander);
+    per->addRight(camilla);
+
     ola.printTree();
 
 
