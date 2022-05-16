@@ -96,9 +96,6 @@ void printMenuOptions() {
 }
 
 void App::addAncestor() {
-    // Step 1: Create a new person
-    // Step 2: Prompt the user which person this person should be the parent of
-    //std::cout << "Who is the child? (Enter name)" << std::endl;
     auto person = ancestorTree::createPerson(true);
     bool successfullyAddedParent = false;
     std::string childName;
@@ -110,23 +107,14 @@ void App::addAncestor() {
         std::getline(std::cin, childName);
         successfullyAddedParent = root_.addParentFunc(childName, person);
 
-
         if (!successfullyAddedParent) {
-            std::cout << "Couldn't find person with the name: " << childName << ".\n";
-            std::cout << "Try plotting the name of ancestors child again: ";
+            std::cout << "The person: " << childName << ". Does not exist within the tree.\n";
+            std::cout << "Try plotting the name of " << person.getName() << "’s" << ", child again: ";
         }
-        else if(successfullyAddedParent){
+        else {
             std::cout << "Ancestor: " << person.getName() << "," << " Successfully added to tree." << std::endl;
         }
     }
-
-
-    //std::cout << "Name: " << childName << std::endl;
-
-    //}
-    // Step 4: When child is found, child.addParent(person)
-    // Step 4b: If child is not found, say child not found and don't add person to
-    // tree
 }
 
 void App::printIndividual() {
