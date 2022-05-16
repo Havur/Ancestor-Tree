@@ -71,7 +71,7 @@ public:
     bool addParentFunc(const std::string &childName, const Person &ancestor) {
         auto child = traverseDepthFirst([childName](nodeTree *node) {
             return childName == node->data_.getName();
-        },[](nodeTree *, int) {});
+        }, [](nodeTree *, int) {});
 
         if (child != nullptr) {
             child->addParent(ancestor);

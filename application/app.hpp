@@ -5,17 +5,22 @@
 
 
 int getNumberFromUser();
+
 void printMenuOptions();
+
 int getValidNumberBetween(int lower, int upper);
 
 class App {
 public:
     App() : root_(nodeTree(ancestorTree::createPerson(false))) {}
+
     void exec();
+
 private:
     nodeTree root_;
 
     void addAncestor();
+
     void printIndividual();
 };
 
@@ -69,7 +74,7 @@ int getNumberFromUser() {
     try {
         input = std::stoi(choice);
     } catch (std::exception &ex) {
-        std::cout << "The input is not recognized as a number. Please try again!";
+        std::cout << "The input is not recognized as a number. Please try again!" <<std::endl;
     }
 
     return input;
@@ -96,21 +101,22 @@ void App::addAncestor() {
     //std::cout << "Who is the child? (Enter name)" << std::endl;
     auto person = ancestorTree::createPerson(true);
     bool successfullyAddedParent = false;
+    std::string childName;
+    std::cout << "Plot the name of " << person.getName()<< "’s child: ";
+    std::getline(std::cin, childName);
 
     while (!successfullyAddedParent) {
         // Step 2: Prompt the user which person this person should be the parent of
-        std::string firstName;
-        std::string lastName;
-
-        std::cout << "Who is the child?" << std::endl;
-
-        char childName[256];
-        std::cin.getline(childName, 256);
-
+        std::getline(std::cin, childName);
         successfullyAddedParent = root_.addParentFunc(childName, person);
 
+
         if (!successfullyAddedParent) {
-            std::cout << "Couldn't find person in tree with the name: " << childName << std::endl;
+            std::cout << "Couldn't find person with the name: " << childName << ".\n";
+            std::cout << "Try plotting the name of ancestors child again: ";
+        }
+        else if(successfullyAddedParent){
+            std::cout << "Ancestor: " << person.getName() << "," << " Successfully added to tree." << std::endl;
         }
     }
 
