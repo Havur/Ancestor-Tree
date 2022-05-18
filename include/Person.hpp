@@ -38,7 +38,15 @@ public:
         }
         return age;
     }
-
+    void setGender(const Gender gender) {
+        gender_ = gender;
+    }
+    void setBirthYear(const int birthYear) {
+        birthYear_ = birthYear;
+    }
+    void setName(const std::string& name) {
+        name_ = name;
+    }
 
     [[nodiscard]] std::string getName() const {
         return name_;

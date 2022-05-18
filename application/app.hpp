@@ -6,7 +6,7 @@
 
 int getNumberFromUser();
 
-void printMenuOptions();
+void printTreeMenuOptions();
 
 int getValidNumberBetween(int lower, int upper);
 
@@ -21,7 +21,7 @@ private:
 
     void addAncestor();
 
-    void printIndividual();
+    nodeTree *getIndividual();
 
     void editIndividual();
 };
@@ -29,9 +29,9 @@ private:
 void App::exec() {
     bool quit = false;
     while (!quit) {
-        printMenuOptions();
+        printTreeMenuOptions();
 
-        int userMenuChoice = getValidNumberBetween(0, 3);
+        int userMenuChoice = getValidNumberBetween(0, 4);
 
         switch (userMenuChoice) {
             case 1:
@@ -39,7 +39,7 @@ void App::exec() {
                 break;
 
             case 2: {
-                printIndividual();
+                getIndividual();
                 break;
             }
             case 3: {
@@ -81,13 +81,13 @@ int getNumberFromUser() {
     try {
         input = std::stoi(choice);
     } catch (std::exception &ex) {
-        std::cout << "The input is not recognized as a number. Please try again!" <<std::endl;
+        std::cout << "The input is not recognized as a number. Please try again!" << std::endl;
     }
 
     return input;
 }
 
-void printMenuOptions() {
+void printTreeMenuOptions() {
     std::cout << "Main menu:"
               << "\n";
 
@@ -97,16 +97,37 @@ void printMenuOptions() {
               << "\n";
     std::cout << "3: Add ancestor"
               << "\n";
+    std::cout << "4: Edit person"
+              << "\n";
     std::cout << "0: Exit"
               << "\n";
 
 }
 
+void printEditPersonMenuOptions() {
+    std::cout << "Person Editor Menu" "\n";
+    std::cout << "Type a number to choose which field you would like to edit : "
+              << "\n";
+
+    std::cout << "1: Edit name"
+              << "\n";
+    std::cout << "2: Edit birthyear"
+              << "\n";
+    std::cout << "3: Edit deathyear"
+              << "\n";
+    //std::cout << "4: Not in use yet"
+    //          << "\n";
+    std::cout << "0: Exit"
+              << "\n";
+
+}
+
+
 void App::addAncestor() {
     auto person = ancestorTree::createPerson(true);
     bool successfullyAddedParent = false;
     std::string childName;
-    std::cout << "Plot the name of " << person.getName()<< "’s child: ";
+    std::cout << "Plot the name of " << person.getName() << "’s child: ";
     std::getline(std::cin, childName);
 
     while (!successfullyAddedParent) {
@@ -117,15 +138,14 @@ void App::addAncestor() {
         if (!successfullyAddedParent) {
             std::cout << "The person: " << childName << ". Does not exist within the tree.\n";
             std::cout << "Try plotting the name of " << person.getName() << "’s" << ", child again: ";
-        }
-        else {
+        } else {
             std::cout << "Ancestor: " << person.getName() << "," << " Successfully added to tree." << std::endl;
         }
     }
 }
 
-void App::printIndividual() {
-    std::cout << "Enter the name of the person you wish to search for" << std::endl;
+nodeTree *App::getIndividual() {
+    std::cout << "Enter individuals name: ";
     std::cin.ignore();
     std::string name;
     std::getline(std::cin, name);
@@ -133,14 +153,59 @@ void App::printIndividual() {
     if (person != nullptr) {
         std::cout << person->data_ << "\n";
     } else {
-        std::cout << "Couldn't find person " << name << "\n";
+        std::cout << "Couldn't find person: " << name << "\n";
     }
+
+    return person;
     //TODO, make an edit option so that user can edit the person searched for.
     //TODO, Add relative level "Grandfather,mother,grandmother" etc.
 }
-void App::editIndividual(){
-    
 
+void App::editIndividual() {
+    bool quit = false;
+    while (!quit) {
+        printEditPersonMenuOptions();
+
+        int userMenuChoice = getValidNumberBetween(0, 4);
+
+        switch (userMenuChoice) {
+            case 1: {
+                auto personToEdit = getIndividual();
+                std::cout << "Edit person’s new name here: " << std::endl;
+                std::string newName;
+                std::getline(std::cin, newName);
+                personToEdit->data_.setName(newName);
+                //std::cin.ignore();
+                std::cout << newName << ", Successfully changed" << std::endl;
+                break;
+            }
+
+            case 2: {
+                auto personToEdit = getIndividual();
+                std::cout << "Edit person’s new birth year here: ";
+                int newBirthYear;
+                std::cin >> newBirthYear;
+                personToEdit->data_.setBirthYear(newBirthYear);
+                break;
+            }
+            case 3: {
+                auto personToEdit = getIndividual();
+                std::cout << "Edit person’s new gender here: ";
+                Gender newGender;
+                personToEdit->data_.setGender(newGender);
+
+                break;
+            }
+                //      case 4: {
+                //
+
+                //          break;
+                //      }
+            case 0:
+                quit = true;
+                break;
+        }
+    }
 }
 
 #endif //ANCESTOR_TREE_APP_HPP
