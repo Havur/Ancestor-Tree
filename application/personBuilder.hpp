@@ -34,8 +34,7 @@ namespace ancestorTree {
         std::cin >> aliveInput;
 
         if (aliveInput == "yes" || aliveInput == "y") {
-
-        } else if (aliveInput == "no" || aliveInput == "n") {
+        }else if (aliveInput == "no" || aliveInput == "n") {
             int deathYearTemp = -1;
             while (deathYearTemp == -1) {
                 std::string input;
@@ -50,30 +49,37 @@ namespace ancestorTree {
         } else {
         }
 
+
         Gender gender_;
-        std::string genderString;
-        std::cout << "Insert gender Male/Female/Other: ";
-        std::cin >> genderString;
-        if (genderString == "Male" || genderString == "m") {
-            gender_ = Gender::male;
-        } else if (genderString == "Female" || genderString == "f") {
-            gender_ = Gender::female;
-        } else if (genderString == "Other" || genderString == "o") {
-            gender_ = Gender::other;
-        }
-    else {
-            int genderTemp = -1 ;
-            while (genderTemp == -1) {
-                genderString = genderTemp;                                            //TODO, Failsafe gender, (halveis)
+        bool genderTemp = false;
+        while (!genderTemp) {
+            std::string genderString;
+            std::cout << "Insert gender Male/Female/Other: ";
+            std::cin >> genderString;
+
+            if (genderString == "Male" || genderString == "m") {
+                gender_ = Gender::male;
+                genderTemp = true;
+            } else if (genderString == "Female" || genderString == "f") {
+                gender_ = Gender::female;
+                genderTemp = true;
+            } else if (genderString == "Other" || genderString == "o") {
+                gender_ = Gender::other;
+                genderTemp = true;
+            } else if (genderTemp == isdigit(genderTemp)) {
                 try {
                     genderTemp = std::stoi(genderString);
-                } catch (std::exception &ex) {
-                    std::cout << "Unknown input, add a valid gender." << std::endl;
-
                 }
+                catch (std::exception &ex) {
+                    std::cout << "is an unknown input, add a valid gender." << std::endl;
+                    genderTemp = false;
+                }
+            } else {
+
+
             }
 
-}
+        }
 
         return Person{name_, gender_, birthYear_, deathYear};
     }
