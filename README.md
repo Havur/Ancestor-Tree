@@ -11,6 +11,9 @@ add a new ancestor, print out information of a created person or print the compl
 ###Instructions for use
 Note that the application is sensitive to incorrect misspelling of names, characters and numbers. For example adding an
 ancestor that does not exist in the tree. The user will get a message saying: "The name does not exist, try again" or "Unknown answer" etc.
+It is only possible to add two parents to each person in the tree, stepparents are therefor not possible to add to a person. The application does take into account
+of people that don`t have a specified gender and parents that share the same gender. For this reason the family tree does NOT need to be biological, but it can be if user wishes to.
+
 
 USER INSTRUCTIONS:
 1. The app starts by asking the user to create the root node in the tree. This can be themselves or the person they want the tree to revolve around.

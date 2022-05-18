@@ -22,6 +22,8 @@ private:
     void addAncestor();
 
     void printIndividual();
+
+    void editIndividual();
 };
 
 void App::exec() {
@@ -42,6 +44,11 @@ void App::exec() {
             }
             case 3: {
                 addAncestor();
+
+                break;
+            }
+            case 4: {
+                editIndividual();
 
                 break;
             }
@@ -118,7 +125,7 @@ void App::addAncestor() {
 }
 
 void App::printIndividual() {
-    std::cout << "Enter the name of whom you wish to search for" << std::endl;
+    std::cout << "Enter the name of the person you wish to search for" << std::endl;
     std::cin.ignore();
     std::string name;
     std::getline(std::cin, name);
@@ -130,6 +137,10 @@ void App::printIndividual() {
     }
     //TODO, make an edit option so that user can edit the person searched for.
     //TODO, Add relative level "Grandfather,mother,grandmother" etc.
+}
+void App::editIndividual(){
+    
+
 }
 
 #endif //ANCESTOR_TREE_APP_HPP
