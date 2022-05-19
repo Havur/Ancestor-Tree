@@ -9,7 +9,7 @@ The app then gives the user a main menu where they get to decide if they would l
 add a new ancestor, print out, edit or delete information of a created person and print the complete ancestral diagram in the application.
 
 ##Development
-The code does have CI and does compile to the latest windows, mac and ubuntu
+The code does have CI and does compile to the latest windows, macOS and ubuntu versions
 
 ###Instructions for use
 Note that the application is sensitive to incorrect misspelling of names, characters and numbers. For example adding an
