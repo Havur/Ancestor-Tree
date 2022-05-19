@@ -89,7 +89,7 @@ int getNumberFromUser() {
 }
 
 void printTreeMenuOptions() {
-    std::cout << "\n""Main menu:""\n";
+    std::cout << "\n""Main Menu:""\n";
     std::cout << "──────────────────────────┐" << std::endl;
 
     std::cout << "1: Print tree             │"
