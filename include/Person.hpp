@@ -38,16 +38,23 @@ public:
         }
         return age;
     }
-    void setGender(const Gender gender) {
+
+    void setGender(Gender gender) {
         gender_ = gender;
     }
     void setBirthYear(const int birthYear) {
         birthYear_ = birthYear;
     }
+    void setDeathYear(const int deathYear) {
+        deathYear_ = deathYear;
+    }
     void setName(const std::string& name) {
         name_ = name;
     }
 
+    [[nodiscard]] const std::optional<int> getDeathYear() const {
+        return deathYear_;
+    }
     [[nodiscard]] std::string getName() const {
         return name_;
     }
@@ -60,7 +67,11 @@ public:
         os << "Name: " << person.getName() << "\n";
         os << "Age: " << person.getAge() << "\n";
         os << "Year of birth: " << person.birthYear_ << "\n";
-        //os << "Year of death: " << person.deathYear_ << "\n";
+        if(person.deathYear_){
+        os << "Year of death: " <<  *person.deathYear_ << "\n";}
+        else{
+            os << "No year of death" << "\n";
+        }
         // if not dead return "none" TODO, find a solution of how to add deathyear, since int is optional
         bool isMale = person.getGender() == Gender::male;
         bool isFemale = person.getGender() == Gender::female;

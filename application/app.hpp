@@ -53,6 +53,7 @@ void App::exec() {
                 break;
             }
             case 0:
+            default:
                 quit = true;
                 break;
         }
@@ -105,21 +106,27 @@ void printTreeMenuOptions() {
 }
 
 void printEditPersonMenuOptions() {
-    std::cout << "Person Editor Menu" "\n";
-    std::cout << "Type a number to choose which field you would like to edit : "
-              << "\n";
+    std::cout << "Person Editor Menu:" "\n\n";
 
     std::cout << "1: Edit name"
               << "\n";
-    std::cout << "2: Edit birthyear"
+    std::cout << "2: Edit birth year"
               << "\n";
-    std::cout << "3: Edit deathyear"
+    std::cout << "3: Edit gender"
               << "\n";
-    //std::cout << "4: Not in use yet"
-    //          << "\n";
+
+    std::cout << "4: Edit death year"
+            << "\n";
+
+    std::cout << "5: Delete person"
+              << "\n";
+
     std::cout << "0: Exit"
               << "\n";
 
+
+    std::cout << "Type a number to choose which field you would like to edit : "
+              << "\n";
 }
 
 
@@ -171,37 +178,75 @@ void App::editIndividual() {
         switch (userMenuChoice) {
             case 1: {
                 auto personToEdit = getIndividual();
-                std::cout << "Edit person’s new name here: " << std::endl;
+                std::cout << "Edit " << personToEdit->data_.getName() << "’s new name here: ";
                 std::string newName;
                 std::getline(std::cin, newName);
                 personToEdit->data_.setName(newName);
-                //std::cin.ignore();
                 std::cout << newName << ", Successfully changed" << std::endl;
                 break;
             }
 
             case 2: {
                 auto personToEdit = getIndividual();
-                std::cout << "Edit person’s new birth year here: ";
+                std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of birth here: " << std::endl;
                 int newBirthYear;
                 std::cin >> newBirthYear;
                 personToEdit->data_.setBirthYear(newBirthYear);
+                std::cout << "The year:" << newBirthYear << ", successfully changed to " << personToEdit->data_.getName() << "’s birth day" << std::endl;
+
                 break;
             }
             case 3: {
                 auto personToEdit = getIndividual();
-                std::cout << "Edit person’s new gender here: ";
+                std::cout << "Edit " << personToEdit->data_.getName() << "’s new gender below." << std::endl;
                 Gender newGender;
+                bool genderTemp = false;
+                while (!genderTemp) {
+                    std::string genderString;
+                    std::cout << "Insert gender Male/Female/Other: ";
+                    std::cin >> genderString;
+
+                    if (genderString == "Male" || genderString == "m") {
+                        newGender = Gender::male;
+                        genderTemp = true;
+                    } else if (genderString == "Female" || genderString == "f") {
+                        newGender = Gender::female;
+                        genderTemp = true;
+                    } else if (genderString == "Other" || genderString == "o") {
+                        newGender = Gender::other;
+                        genderTemp = true;
+                    } else if (genderTemp == isdigit(genderTemp)) {
+                        try {
+                            genderTemp = std::stoi(genderString);
+                        }
+                        catch (std::exception &ex) {
+                            std::cout << genderString << ", is an unknown input, add a valid gender." << std::endl;
+                            genderTemp = false;
+                        }
+                    } else {
+                    }
+                }
                 personToEdit->data_.setGender(newGender);
+                std::cout << "Successfully changed " << personToEdit->data_.getName() << "’s gender" << std::endl;
 
                 break;
             }
-                //      case 4: {
-                //
+            case 4: {
+                auto personToEdit = getIndividual();
+                if(personToEdit->data_.getDeathYear()) {  //Todo, fix logikken slik at den funka
+                    std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of death here: " << std::endl;
+                    int newDeathYear;
+                    std::cin >> newDeathYear;
+                    personToEdit->data_.setDeathYear(newDeathYear);
+                }
+                else {
+                    std::cout << personToEdit->data_.getName() << ", does not have a registered death year." << std::endl;
+                }
+                break;
 
-                //          break;
-                //      }
+            }
             case 0:
+                default:
                 quit = true;
                 break;
         }
