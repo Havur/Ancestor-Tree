@@ -62,6 +62,13 @@ public:
     [[nodiscard]] Gender getGender() const {
         return gender_;
     }
+    void makeEmptyPerson(){
+        name_ = "Empty";
+        gender_ = Gender::other;
+        birthYear_ = 0;
+        deathYear_ = 0;
+
+    }
     friend std::ostream& operator<<(std::ostream& os, const Person& person)
     {
         os << "Name: " << person.getName() << "\n";

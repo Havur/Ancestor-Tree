@@ -89,40 +89,47 @@ int getNumberFromUser() {
 }
 
 void printTreeMenuOptions() {
-    std::cout << "Main menu:"
+    std::cout << "\n""Main menu:""\n";
+    std::cout << "──────────────────────────┐" << std::endl;
+
+    std::cout << "1: Print tree             │"
+              << "\n";
+    std::cout << "2: Person info            │"
+              << "\n";
+    std::cout << "3: Add ancestor           │"
+              << "\n";
+    std::cout << "4: Edit person            │"
+              << "\n";
+    std::cout << "0: Exit                   │"
               << "\n";
 
-    std::cout << "1: Print tree"
-              << "\n";
-    std::cout << "2: Print individual"
-              << "\n";
-    std::cout << "3: Add ancestor"
-              << "\n";
-    std::cout << "4: Edit person"
-              << "\n";
-    std::cout << "0: Exit"
-              << "\n";
+    std::cout << "──────────────────────────┘" << std::endl;
 
+    std::cout << "Type a menu option : "
+              << "\n";
 }
 
 void printEditPersonMenuOptions() {
-    std::cout << "Person Editor Menu:" "\n\n";
+    std::cout << "\n""Person Editor Menu:""\n";
+    std::cout << "──────────────────────────┐" << std::endl;
 
-    std::cout << "1: Edit name"
+    std::cout << "1: Edit name              │"
               << "\n";
-    std::cout << "2: Edit birth year"
+    std::cout << "2: Edit birth year        │"
               << "\n";
-    std::cout << "3: Edit gender"
+    std::cout << "3: Edit gender            │"
               << "\n";
 
-    std::cout << "4: Edit death year"
+    std::cout << "4: Edit death year        │"
             << "\n";
 
-    std::cout << "5: Delete person"
+    std::cout << "5: Delete person          │"
               << "\n";
 
-    std::cout << "0: Exit"
+    std::cout << "0: Exit to main menu      │"
               << "\n";
+
+    std::cout << "──────────────────────────┘" << std::endl;
 
 
     std::cout << "Type a number to choose which field you would like to edit : "
@@ -131,6 +138,7 @@ void printEditPersonMenuOptions() {
 
 
 void App::addAncestor() {
+    std::cout << "Adding ancestor, please follow instructions. " << std::endl;
     auto person = ancestorTree::createPerson(true);
     bool successfullyAddedParent = false;
     std::string childName;
@@ -164,7 +172,6 @@ nodeTree *App::getIndividual() {
     }
 
     return person;
-    //TODO, make an edit option so that user can edit the person searched for.
     //TODO, Add relative level "Grandfather,mother,grandmother" etc.
 }
 
@@ -173,7 +180,7 @@ void App::editIndividual() {
     while (!quit) {
         printEditPersonMenuOptions();
 
-        int userMenuChoice = getValidNumberBetween(0, 4);
+        int userMenuChoice = getValidNumberBetween(0, 5);
 
         switch (userMenuChoice) {
             case 1: {
@@ -192,7 +199,7 @@ void App::editIndividual() {
                 int newBirthYear;
                 std::cin >> newBirthYear;
                 personToEdit->data_.setBirthYear(newBirthYear);
-                std::cout << "The year:" << newBirthYear << ", successfully changed to " << personToEdit->data_.getName() << "’s birth day" << std::endl;
+                std::cout << "The year: " << newBirthYear << ", successfully changed to " << personToEdit->data_.getName() << "’s birth day" << std::endl;
 
                 break;
             }
@@ -233,18 +240,23 @@ void App::editIndividual() {
             }
             case 4: {
                 auto personToEdit = getIndividual();
-                if(personToEdit->data_.getDeathYear()) {  //Todo, fix logikken slik at den funka
+                if (personToEdit->data_.getDeathYear()) {  //Todo, fix logikken slik at den funka
                     std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of death here: " << std::endl;
                     int newDeathYear;
                     std::cin >> newDeathYear;
                     personToEdit->data_.setDeathYear(newDeathYear);
+                } else {
+                    std::cout << personToEdit->data_.getName() << ", does not have a registered death year."
+                              << std::endl;
                 }
-                else {
-                    std::cout << personToEdit->data_.getName() << ", does not have a registered death year." << std::endl;
-                }
-                break;
-
             }
+                case 5: {
+                    auto personToEdit = getIndividual();
+                    personToEdit->data_.makeEmptyPerson();
+                    std::cout << "Person successfully deleted" << std::endl;
+                    break;
+
+                }
             case 0:
                 default:
                 quit = true;

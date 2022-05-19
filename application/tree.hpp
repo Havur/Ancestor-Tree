@@ -96,7 +96,7 @@ public:
             }
 
             if (depth != 0) {
-                std::cout << " └───";
+                std::cout << " └─── ";
             }
 
             std::cout << node->data_.getName() << "\n";
