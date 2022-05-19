@@ -52,7 +52,7 @@ namespace ancestorTree {
         bool genderTemp = false;
         while (!genderTemp) {
             std::string genderString;
-            std::cout << "Insert gender Male/Female/Other: ";
+            std::cout << "Insert gender Male(m)/Female(f)/Other(o): ";
             std::cin >> genderString;
 
             if (genderString == "Male" || genderString == "m") {

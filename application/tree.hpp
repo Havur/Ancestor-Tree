@@ -9,19 +9,21 @@
 #include "personBuilder.hpp"
 #include "Person.hpp"
 #include <memory>
-
-class nodeTree {
+/*
+ * This is a tree header file that has names which contains a data tree structure
+ */
+class NodeTree {
 
 private:
-    nodeTree *parent_ = nullptr;
+    NodeTree *parent_ = nullptr;
     // std::vector<nodeTree*> children;
-    std::shared_ptr<nodeTree> left_, right_;
+    std::shared_ptr<NodeTree> left_, right_;
 
 public:
     // explicit nodeTree(nodeTree *p);
 
     void addParent(const Person &parent) {
-        auto sharedParent = std::make_shared<nodeTree>(parent);
+        auto sharedParent = std::make_shared<NodeTree>(parent);
 
         if (left_ == nullptr) {
             addLeft(sharedParent);
@@ -30,12 +32,12 @@ public:
         }
     }
 
-    void addLeft(std::shared_ptr<nodeTree> parent1) {
+    void addLeft(std::shared_ptr<NodeTree> parent1) {
         left_ = std::move(parent1);
         left_->parent_ = this;
     }
 
-    void addRight(std::shared_ptr<nodeTree> parent2) {
+    void addRight(std::shared_ptr<NodeTree> parent2) {
         right_ = std::move(parent2);
         right_->parent_ = this;
     }
@@ -44,8 +46,8 @@ public:
         return parent_ != nullptr;
     }
 
-    nodeTree *
-    traverseDepthFirst(const std::function<bool(nodeTree *)> &predicate, const std::function<void(nodeTree *, int)> &f,
+    NodeTree *
+    traverseDepthFirst(const std::function<bool(NodeTree *)> &predicate, const std::function<void(NodeTree *, int)> &f,
                        int currDepth = 0) {
         f(this, currDepth);
 
@@ -69,9 +71,9 @@ public:
     }
 
     bool addParentFunc(const std::string &childName, const Person &ancestor) {
-        auto child = traverseDepthFirst([childName](nodeTree *node) {
+        auto child = traverseDepthFirst([childName](NodeTree *node) {
             return childName == node->data_.getName();
-        }, [](nodeTree *, int) {});
+        }, [](NodeTree *, int) {});
 
         if (child != nullptr) {
             child->addParent(ancestor);
@@ -81,16 +83,16 @@ public:
         return false;
     }
 
-    // returner en person (nodeTree*), gitt et navn (std::string)
-    nodeTree *findByName(std::string &name) {
+    // returner en Person (nodeTree*), gitt et navn (std::string)
+    NodeTree *findByName(std::string &name) {
         // returner personen du får fra traverseDepthFirst direkte
-        return traverseDepthFirst([name](nodeTree *node) { return name == node->data_.getName(); },
-                                  [](nodeTree *, int) {});
+        return traverseDepthFirst([name](NodeTree *node) { return name == node->data_.getName(); },
+                                  [](NodeTree *, int) {});
     }
 
     void printTree() {
-        auto l1 = [](nodeTree *) { return false; };
-        auto l2 = [](nodeTree *node, int depth) {
+        auto l1 = [](NodeTree *) { return false; };
+        auto l2 = [](NodeTree *node, int depth) {
             for (size_t i = 0; i < depth; i++) {
                 std::cout << "    ";
             }
@@ -105,7 +107,7 @@ public:
         traverseDepthFirst(l1, l2);
     }
 
-    explicit nodeTree(Person p) : data_(std::move(p)) {}
+    explicit NodeTree(Person p) : data_(std::move(p)) {}
 
     Person data_;
 };

@@ -26,7 +26,7 @@ public:
                                                                                            deathYear_(deathYear) {
     }
 
-    [[nodiscard]] int getAge() const {
+    [[nodiscard]] int getAge() const {   //Function to get age by using now, death and birth year and finding age
         int age;
         int now = floor(static_cast<double>(std::chrono::system_clock::now().time_since_epoch().count())/31556952000000 + 1970);
         //using chrono and dividing with a year in microseconds and adding 1970
@@ -39,7 +39,7 @@ public:
         return age;
     }
 
-    void setGender(Gender gender) {
+    void setGender(Gender gender) {   //setters and getters
         gender_ = gender;
     }
     void setBirthYear(const int birthYear) {
@@ -62,14 +62,14 @@ public:
     [[nodiscard]] Gender getGender() const {
         return gender_;
     }
-    void makeEmptyPerson(){
+    void makeEmptyPerson(){   //Function for deleting person, setting data equal to "none"
         name_ = "Empty";
         gender_ = Gender::other;
         birthYear_ = 0;
         deathYear_ = 0;
 
     }
-    friend std::ostream& operator<<(std::ostream& os, const Person& person)
+    friend std::ostream& operator<<(std::ostream& os, const Person& person)   //operator overloading to get person info
     {
         os << "Name: " << person.getName() << "\n";
         os << "Age: " << person.getAge() << "\n";
@@ -79,7 +79,6 @@ public:
         else{
             os << "No year of death" << "\n";
         }
-        // if not dead return "none" TODO, find a solution of how to add deathyear, since int is optional
         bool isMale = person.getGender() == Gender::male;
         bool isFemale = person.getGender() == Gender::female;
         if (isMale) {
