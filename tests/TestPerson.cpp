@@ -8,16 +8,16 @@
 
 #include <sstream>
 
-TEST_CASE("Print induvidual") {
-    Person person{"Ola", Gender::male, 2000, 2010};
+TEST_CASE("Print individual") {   //Test to print individual
+    Person person{"Ola", Gender::male, 2000, 2010};    //Giving person data and printing it to console
     std::cout << person << std::endl;
     std::cout << "──────────────────────────────────────────" << "\n";
 }
 
 TEST_CASE("Print tree") {
 
-    std::cout << "TEST FOR PRINTING TREE:" << "\n";
-    std::cout << "\n";
+    std::cout << "TEST FOR PRINTING TREE:" << "\n";  //Test to see if case 1 print tree works and looks as it should.
+    std::cout << "\n";                              //Making nodes and giving them names and pointing them to each other
     NodeTree ola{Person{"Ola", Gender::male, 2000, 0}};
 
     auto connie = std::make_shared<NodeTree>(Person{"Connie", Gender::male, 2000, 0});

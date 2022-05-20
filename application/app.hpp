@@ -24,6 +24,16 @@ private:
     NodeTree *getIndividual();
 
     void editIndividual();
+
+    void editName();
+
+    void editBirthYear();
+
+    void editGender();
+
+    void editDeathYear();
+
+    void deletePersonData();
 };
 
 void App::exec() {
@@ -149,8 +159,7 @@ void App::addAncestor() {   //Function for adding an ancestor in the tree that i
 
     while (!successfullyAddedParent) {   //Failsafe user input while parent successfully added set input as ancestor
         std::getline(std::cin, childName);
-        successfullyAddedParent = root_.addParentFunc(childName,
-                                                      person);   //Traversing and sets input from user as ancestor in the tree
+        successfullyAddedParent = root_.addParentFunc(childName,person);   //Traversing and sets input from user as ancestor in the tree
 
         if (!successfullyAddedParent) {   //Failsafe and tells user if ancestor they are trying to add exists or not
             std::cout << "The Person: " << childName << ". Does not exist within the tree.\n";
@@ -162,20 +171,94 @@ void App::addAncestor() {   //Function for adding an ancestor in the tree that i
 }
 
 NodeTree *App::getIndividual() {   //Function that finds individuals information (data)
-    std::cout << "Enter individuals name: ";
-    std::cin.ignore();
-    std::string name;
-    std::getline(std::cin, name);
-    auto person = root_.findByName(name);
-    if (person != nullptr) {
-        std::cout << person->data_ << "\n";
-    } else {   //Failsafe
-        std::cout << "Couldn't find Person: " << name << "\n";
+        std::cout << "Enter individuals name: ";
+        std::cin.ignore();
+        std::string name;
+        std::getline(std::cin, name);
+        auto person = root_.findByName(name);
+        if (person != nullptr) {
+            std::cout << person->data_ << "\n";
+        }
+        else {   //Failsafe
+            std::cout << "Couldn't find Person: " << name << "\n";
 
+        }
+
+        return person;
     }
 
-    return person;
-    //TODO, Add relative level "Grandfather,mother,grandmother" etc.
+void App::editName() {
+    auto personToEdit = getIndividual();
+    std::cout << "Edit " << personToEdit->data_.getName() << "’s new name here: ";
+    std::string newName;
+    std::getline(std::cin, newName);
+    personToEdit->data_.setName(newName);
+    std::cout << newName << ", Successfully changed" << std::endl;
+
+}
+
+void App::editBirthYear() {
+    auto personToEdit = getIndividual();
+    std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of birth here: " << std::endl;
+    int newBirthYear;
+    std::cin >> newBirthYear;
+    personToEdit->data_.setBirthYear(newBirthYear);
+    std::cout << "The year: " << newBirthYear << ", successfully changed to "
+              << personToEdit->data_.getName() << "’s birth day" << std::endl;
+}
+
+void App::editGender() {
+    auto personToEdit = getIndividual();
+    std::cout << "Edit " << personToEdit->data_.getName() << "’s new gender below." << std::endl;
+    Gender newGender;
+    bool genderTemp = false;
+    while (!genderTemp) {   // Failsafe, if gender is something else than options copied from person builder
+        std::string genderString;
+        std::cout << "Insert gender, type Male,(m)/Female,(f)/Other,(o): ";
+        std::cin >> genderString;
+
+        if (genderString == "Male" || genderString == "m") { //if gender is a valid gender return true
+            newGender = Gender::male;
+            genderTemp = true;
+        } else if (genderString == "Female" || genderString == "f") {
+            newGender = Gender::female;
+            genderTemp = true;
+        } else if (genderString == "Other" || genderString == "o") {
+            newGender = Gender::other;
+            genderTemp = true;
+        } else if (genderTemp == isdigit(genderTemp)) {   //try and catch to check if gender is true
+            try {
+                genderTemp = std::stoi(genderString);
+            }
+            catch (std::exception &ex) {   //if gender is false input from user is not valid gender loop again
+                std::cout << genderString << ", is an unknown input, add a valid gender." << std::endl;
+                genderTemp = false;
+            }
+        } else {
+        }
+    }
+    personToEdit->data_.setGender(newGender);   //setting edited gender as new gender
+    std::cout << "Successfully changed " << personToEdit->data_.getName() << "’s gender" << std::endl;
+}
+
+void App::editDeathYear() {
+    auto personToEdit = getIndividual();
+    if (personToEdit->data_.getDeathYear()) {
+        std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of death here: " << std::endl;
+        int newDeathYear;
+        std::cin >> newDeathYear;
+        personToEdit->data_.setDeathYear(newDeathYear);
+    } else {   //if person to edit does not have death year return "does not have"
+        std::cout << personToEdit->data_.getName() << ", does not have a registered death year." << std::endl;
+
+    }
+}
+
+void App::deletePersonData() {
+    auto personToEdit = getIndividual();   //NB! DOES NOT DELETE NODE
+    personToEdit->data_.makeEmptyPerson();   //Sets name = "empty", gender as Other and rest of data to 0
+    std::cout << "Person successfully deleted" << std::endl;   //To access node again user can edit "empty"
+    // again and give node new name or keep it empty
 }
 
 void App::editIndividual() {   //Function making a switch case which is the "Edit Person Menu"
@@ -187,81 +270,25 @@ void App::editIndividual() {   //Function making a switch case which is the "Edi
 
         switch (userMenuChoice) {
             case 1: {   // Case 1 searches for person then user can edit persons name
-                auto personToEdit = getIndividual();
-                std::cout << "Edit " << personToEdit->data_.getName() << "’s new name here: ";
-                std::string newName;
-                std::getline(std::cin, newName);
-                personToEdit->data_.setName(newName);
-                std::cout << newName << ", Successfully changed" << std::endl;
+                editName();
                 break;
             }
 
             case 2: {   //Case 2 searches for person then user can edit persons birth year
-                auto personToEdit = getIndividual();
-                std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of birth here: " << std::endl;
-                int newBirthYear;
-                std::cin >> newBirthYear;
-                personToEdit->data_.setBirthYear(newBirthYear);
-                std::cout << "The year: " << newBirthYear << ", successfully changed to "
-                          << personToEdit->data_.getName() << "’s birth day" << std::endl;
-
+                editBirthYear();
                 break;
             }
             case 3: {   //Case 3 searches for person then user can edit gender
-                auto personToEdit = getIndividual();
-                std::cout << "Edit " << personToEdit->data_.getName() << "’s new gender below." << std::endl;
-                Gender newGender;
-                bool genderTemp = false;
-                while (!genderTemp) {   // Failsafe, if gender is something else than options copied from person builder
-                    std::string genderString;
-                    std::cout << "Insert gender, type Male,(m)/Female,(f)/Other,(o): ";
-                    std::cin >> genderString;
-
-
-                    if (genderString == "Male" || genderString == "m") { //if gender is a valid gender return true
-                        newGender = Gender::male;
-                        genderTemp = true;
-                    } else if (genderString == "Female" || genderString == "f") {
-                        newGender = Gender::female;
-                        genderTemp = true;
-                    } else if (genderString == "Other" || genderString == "o") {
-                        newGender = Gender::other;
-                        genderTemp = true;
-                    } else if (genderTemp == isdigit(genderTemp)) {   //try and catch to check if gender is true
-                        try {
-                            genderTemp = std::stoi(genderString);
-                        }
-                        catch (std::exception &ex) {   //if gender is false input from user is not valid gender loop again
-                            std::cout << genderString << ", is an unknown input, add a valid gender." << std::endl;
-                            genderTemp = false;
-                        }
-                    } else {
-                    }
-                }
-                personToEdit->data_.setGender(newGender);   //setting edited gender as new gender
-                std::cout << "Successfully changed " << personToEdit->data_.getName() << "’s gender" << std::endl;
-
+                editGender();
                 break;
             }
             case 4: {   //Case 4 searches for individual then user can edit
-                auto personToEdit = getIndividual();
-                if (personToEdit->data_.getDeathYear()) {
-                    std::cout << "Edit " << personToEdit->data_.getName() << "’s new year of death here: " << std::endl;
-                    int newDeathYear;
-                    std::cin >> newDeathYear;
-                    personToEdit->data_.setDeathYear(newDeathYear);
-                } else {   //if person to edit does not have deathyear return "does not have"
-                    std::cout << personToEdit->data_.getName() << ", does not have a registered death year."
-                              << std::endl;
-                }
+                editDeathYear();
             }
-            case 5: {   //Case 5 searches for individual and deletes data from individual
-                auto personToEdit = getIndividual();   //NB! DOES NOT DELETE NODE
-                personToEdit->data_.makeEmptyPerson();   //Sets name = "empty", gender as Other and rest of data to 0
-                std::cout << "Person successfully deleted" << std::endl;   //To access node again user can edit "empty"
-                                                                           // again and give node new name or keep it empty
                 break;
-
+            case 5: {   //Case 5 searches for individual and deletes data from individual
+                deletePersonData();
+                break;
             }
             case 0:   //Exits from "Person Editor Menu" and goes back to "Main Menu"
             default:

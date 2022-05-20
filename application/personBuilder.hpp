@@ -7,14 +7,14 @@
 #define ANCESTOR_TREE_MAKE_PERSON_HPP
 
 namespace ancestorTree {
-    static Person createPerson(bool hasRootNode) {
+    static Person
+    createPerson(bool hasRootNode) {   //function that prompts user questions to get data to store in an object (person)
         std::string name_;
         std::cout << "Type name: ";
         if (hasRootNode) {
             std::cin.ignore();
-        }                       //this fixes so the the first character in root Person name is not skipped...
+        }                       //this fixes so the first character in root Person name is not skipped.
         std::getline(std::cin, name_);
-        std::cout << "Name: " << name_ << std::endl;
 
         int birthYear_ = -1;
         while (birthYear_ == -1) {
@@ -23,12 +23,12 @@ namespace ancestorTree {
             std::cin >> input;
             try {
                 birthYear_ = std::stoi(input);
-            } catch (std::exception &ex) {
-                std::cout << "Unknown input, add a valid birthyear." << std::endl;
+            } catch (std::exception &ex) {   //Failsafe in case if user input i not valid
+                std::cout << "Unknown input, add a valid birth year." << std::endl;
             }
         }
 
-        std::optional<int> deathYear;
+        std::optional<int> deathYear;   //Death year as optional because person is either alive or not
         std::cout << "Is Person still alive? yes/no: ";
         std::string aliveInput;
         std::cin >> aliveInput;
@@ -48,8 +48,8 @@ namespace ancestorTree {
             }
         } else {
         }
-        Gender gender_;
-        bool genderTemp = false;
+        Gender gender_;   //Gender as an enum class and not string so user input can not be random
+        bool genderTemp = false;   //For Failsafe in while loop if gender something else than true, try again
         while (!genderTemp) {
             std::string genderString;
             std::cout << "Insert gender Male(m)/Female(f)/Other(o): ";
