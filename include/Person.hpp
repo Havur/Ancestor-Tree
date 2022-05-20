@@ -58,7 +58,7 @@ public:
     }
 
     [[nodiscard]] std::optional<int> getDeathYear() const {
-        return deathYear_;
+        return deathYear_ == true;
     }
 
     [[nodiscard]] std::string getName() const {
@@ -82,7 +82,7 @@ public:
         os << "Name: " << person.getName() << "\n";
         os << "Age: " << person.getAge() << "\n";
         os << "Year of birth: " << person.birthYear_ << "\n";
-        if (person.getDeathYear()) {
+        if (!person.getDeathYear()) {
             os << "Year of death: " << *person.getDeathYear() << "\n";   //Not completed function, only returning no year
         } else {
             os << "No year of death." << "\n";
