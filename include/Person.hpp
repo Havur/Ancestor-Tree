@@ -57,7 +57,7 @@ public:
         name_ = name;
     }
 
-    std::optional<int> getDeathYear() const {
+    [[nodiscard]] std::optional<int> getDeathYear() const {
         return deathYear_;
     }
 

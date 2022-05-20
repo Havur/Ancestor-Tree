@@ -181,9 +181,7 @@ NodeTree *App::getIndividual() {   //Function that finds individuals information
         }
         else {   //Failsafe
             std::cout << "Couldn't find Person: " << name << "\n";
-
         }
-
         return person;
     }
 

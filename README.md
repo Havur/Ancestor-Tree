@@ -18,8 +18,9 @@ The code does have CI and compiles to the latest windows, macOS and ubuntu versi
 ###Instructions for use
 Note that the application is sensitive to incorrect misspelling of names/characters/numbers. For example adding an
 ancestor that does not exist in the tree. The user will get a message saying: "The name does not exist, try again" or "Unknown answer" etc.
+Note that each individual MUST have separate names, if persons have the same name use a numeration or jr etc. Persons can also have middle names or surnames, the full name plotted will show in the tree.
 It is only possible to add two parents to each person in the tree, more than two parents are therefor not possible to include to a single person. It is also not possible to add siblings in the tree. The application does take into account
-of people that don`t have a specified gender and parents that share the same gender. For this reason the family tree does NOT need to be biological, but it can be if user wishes to.
+to people that don`t have a specified gender and parents that share the same gender choose other for that. For this reason the family tree does NOT need to be biological, but it can be if user wishes to.
 
 
 **USER INSTRUCTIONS:**
