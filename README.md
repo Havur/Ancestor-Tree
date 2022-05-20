@@ -12,7 +12,7 @@ The app then gives the user a main menu where they get to decide if they would l
 add a new ancestor, print out, edit/delete information of a created person and print the complete ancestral diagram in the application.
 If user wishes to print out diagram the diagram will show in a 2D format, looking like a folder structure with root on top and ancestors under.
 
-###Development
+###Development 
 The code does have CI and compiles to the latest windows, macOS and ubuntu versions.
 
 ###Instructions for use
